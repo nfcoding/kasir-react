@@ -4,7 +4,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { numberWithCommas } from '../utils/utils';
 import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const ModalKeranjang = ({ showModal, handleClose, keranjangDetail, jumlah, keterangan, kurangiPesanan, tambahPesanan, handleChangeKeterangan, handleSubmit, totalHarga }) => {
+const ModalKeranjang = ({ showModal, handleClose, keranjangDetail, jumlah, keterangan, kurangiPesanan, tambahPesanan, handleChangeKeterangan, handleSubmit, totalHarga, hapusPesanan }) => {
     if (keranjangDetail) {
         return (
             <div>
@@ -45,7 +45,7 @@ const ModalKeranjang = ({ showModal, handleClose, keranjangDetail, jumlah, keter
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="danger">
+                        <Button variant="danger" onClick={() => hapusPesanan(keranjangDetail.id)}>
                             <FontAwesomeIcon icon={faTrash} />Hapus Pesanan
                         </Button>
                     </Modal.Footer>

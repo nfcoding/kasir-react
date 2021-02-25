@@ -84,6 +84,26 @@ class Hasil extends Component {
             });
     }
 
+    hapusPesanan = (id) => {
+
+        this.handleClose()
+
+        axios
+            .delete(API_URL + "keranjangs/" + id)
+            .then((res) => {
+                swal({
+                    title: 'Success',
+                    text: "Dihapus!",
+                    icon: 'success',
+                    button: false,
+                    timer: 1500
+                })
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
 
     render() {
         const { keranjangs } = this.props
@@ -114,7 +134,7 @@ class Hasil extends Component {
                             </ListGroup.Item>
                         ))}
 
-                        <ModalKeranjang handleClose={this.handleClose} {...this.state} tambahPesanan={this.tambahPesanan} kurangiPesanan={this.kurangiPesanan} handleSubmit={this.handleSubmit} handleChangeKeterangan={this.handleChangeKeterangan} />
+                        <ModalKeranjang handleClose={this.handleClose} {...this.state} tambahPesanan={this.tambahPesanan} kurangiPesanan={this.kurangiPesanan} handleSubmit={this.handleSubmit} handleChangeKeterangan={this.handleChangeKeterangan} hapusPesanan={this.hapusPesanan} />
                     </ListGroup>
                 )}
                 {keranjangs.length < 1 && <h6>Belum Ada Pesanan</h6>}
