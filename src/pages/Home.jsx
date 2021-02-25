@@ -126,7 +126,7 @@ class App extends Component {
                         <ListCategories changeCategory={this.changeCategory} selectedCategory={selectedCategory} />
                         <Col>
                             <h3>Daftar Produk</h3>
-                            <Row>
+                            <Row className="overflow-auto menu">
                                 {
                                     menus && menus.map((menu) => (
                                         <Menus key={menu.id + 1} menu={menu} masukKeranjang={this.masukKeranjang} />

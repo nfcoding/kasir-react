@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, ListGroup, Badge } from 'react-bootstrap';
+import { Row, Col, ListGroup, Badge, Card } from 'react-bootstrap';
 import { numberWithCommas } from '../utils/utils';
 import TotalBayar from './TotalBayar';
 import ModalKeranjang from "./ModalKeranjang";
@@ -112,30 +112,32 @@ class Hasil extends Component {
                 <h3>Hasil</h3>
                 <hr />
                 {keranjangs.length > 0 && (
-                    <ListGroup variant="flush">
-                        {keranjangs.map((menuKeranjang) => (
-                            <ListGroup.Item key={menuKeranjang.id + 1} onClick={() => this.handleShow(menuKeranjang)}>
-                                <Row>
-                                    <Col xs={2}>
-                                        <h4>
-                                            <Badge pill variant="success">
-                                                {menuKeranjang.jumlah}
-                                            </Badge>
-                                        </h4>
-                                    </Col>
-                                    <Col>
-                                        <h5>{menuKeranjang.product.nama}</h5>
-                                        <p>Rp. {numberWithCommas(menuKeranjang.product.harga)}</p>
-                                    </Col>
-                                    <Col>
-                                        <strong><p className="float-right">Rp. {numberWithCommas(menuKeranjang.total_harga)}</p></strong>
-                                    </Col>
-                                </Row>
-                            </ListGroup.Item>
-                        ))}
+                    <Card className="overflow-auto hasil">
+                        <ListGroup variant="flush">
+                            {keranjangs.map((menuKeranjang) => (
+                                <ListGroup.Item key={menuKeranjang.id + 1} onClick={() => this.handleShow(menuKeranjang)}>
+                                    <Row>
+                                        <Col xs={2}>
+                                            <h4>
+                                                <Badge pill variant="success">
+                                                    {menuKeranjang.jumlah}
+                                                </Badge>
+                                            </h4>
+                                        </Col>
+                                        <Col>
+                                            <h5>{menuKeranjang.product.nama}</h5>
+                                            <p>Rp. {numberWithCommas(menuKeranjang.product.harga)}</p>
+                                        </Col>
+                                        <Col>
+                                            <strong><p className="float-right">Rp. {numberWithCommas(menuKeranjang.total_harga)}</p></strong>
+                                        </Col>
+                                    </Row>
+                                </ListGroup.Item>
+                            ))}
 
-                        <ModalKeranjang handleClose={this.handleClose} {...this.state} tambahPesanan={this.tambahPesanan} kurangiPesanan={this.kurangiPesanan} handleSubmit={this.handleSubmit} handleChangeKeterangan={this.handleChangeKeterangan} hapusPesanan={this.hapusPesanan} />
-                    </ListGroup>
+                            <ModalKeranjang handleClose={this.handleClose} {...this.state} tambahPesanan={this.tambahPesanan} kurangiPesanan={this.kurangiPesanan} handleSubmit={this.handleSubmit} handleChangeKeterangan={this.handleChangeKeterangan} hapusPesanan={this.hapusPesanan} />
+                        </ListGroup>
+                    </Card>
                 )}
                 {keranjangs.length < 1 && <h6>Belum Ada Pesanan</h6>}
                 <TotalBayar keranjangs={keranjangs} {...this.props} />
